@@ -4,26 +4,23 @@ const fetch = require("node-fetch");
 
 const  Game = require('../models/games');
 
+// mots possibles
 var words = ["Force", "Genie", "Basket", "Capsule", "Joueur", "Espionner", "Verte", "Livret", "Reste", "Nord"];
 
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
+// fonction permettant de choisir un mot au hasard dans le tableau words
 function chooseWord(){
-    return words[getRandomInt(10)]
+    return words[Math.floor(Math.random() * words.length)]
 }
 
 
 router.get("/new", (req, res) => {
-     const theWord = chooseWord().toUpperCase();
-     const newGame = new Game({
-                               word : theWord ,
-                               date : new Date(),
-                               })
-     newGame.save().then(data => {  res.json({result : true, gameId : data.id, wordLength : theWord.length, word : theWord})
-     });
+    const theWord = chooseWord().toUpperCase();
+    const newGame = new Game({
+                              word : theWord ,
+                              date : new Date(),
+                              })
+    newGame.save().then(data => {  res.json({result : true, gameId : data.id, wordLength : theWord.length, word : theWord})
+    });
 })
 
 
