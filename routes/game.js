@@ -14,6 +14,7 @@ function chooseWord(){
 
 
 router.get("/new", (req, res) => {
+    console.log("ici")
     const theWord = chooseWord().toUpperCase();
     const newGame = new Game({
                               word : theWord ,
